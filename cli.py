@@ -11,6 +11,7 @@ def setup_cli():
     image_parser.add_argument('-o', '--output', required=True, help="Archivo de salida (JPEG)")
     image_parser.add_argument('-r', '--resolution', nargs=2, type=int, metavar=('WIDTH', 'HEIGHT'),
                               help="Resolución de la imagen (ancho alto)")
+    image_parser.add_argument('-e', '--exposure', type=int, help="Tiempo de exposición en microsegundos")
 
     # Subcomando para capturar video
     video_parser = subparsers.add_parser('capture-video', help="Captura un video")
@@ -18,11 +19,7 @@ def setup_cli():
     video_parser.add_argument('-d', '--duration', type=int, required=True, help="Duración en segundos")
     video_parser.add_argument('-r', '--resolution', nargs=2, type=int, metavar=('WIDTH', 'HEIGHT'),
                               help="Resolución del video (ancho alto)")
-
-    # Subcomando para ajustar exposición
-    exposure_parser = subparsers.add_parser('set-exposure', help="Ajusta el tiempo de exposición")
-    exposure_parser.add_argument('-t', '--time', type=int, required=True,
-                                 help="Tiempo de exposición en microsegundos")
+    video_parser.add_argument('-e', '--exposure', type=int, help="Tiempo de exposición en microsegundos")
 
     return parser.parse_args()
 
@@ -32,11 +29,9 @@ def main():
     camera = Camera()
 
     if args.command == 'capture-image':
-        camera.capture_image(args.output, resolution=args.resolution)
+        camera.capture_image(args.output, resolution=args.resolution, exposure_time=args.exposure)
     elif args.command == 'capture-video':
-        camera.capture_video(args.output, args.duration, resolution=args.resolution)
-    elif args.command == 'set-exposure':
-        camera.set_exposure(args.time)
+        camera.capture_video(args.output, args.duration, resolution=args.resolution, exposure_time=args.exposure)
 
 if __name__ == "__main__":
     main()

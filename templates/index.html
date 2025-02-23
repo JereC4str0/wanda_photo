@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Cámara</title>
+</head>
+<body>
+    <h1>Control de Cámara</h1>
+    
+    <h2>Capturar Imagen</h2>
+    <form action="/capture_image" method="post">
+        <label for="resolution_image">Resolución (ancho x alto, ej. 2028x1520):</label>
+        <input type="text" id="resolution_image" name="resolution"><br>
+        <input type="submit" value="Capturar Imagen">
+    </form>
+    
+    <h2>Capturar Video</h2>
+    <form action="/capture_video" method="post">
+        <label for="duration">Duración (segundos):</label>
+        <input type="number" id="duration" name="duration" required><br>
+        <label for="resolution_video">Resolución (ancho x alto, ej. 1920x1080):</label>
+        <input type="text" id="resolution_video" name="resolution"><br>
+        <input type="submit" value="Capturar Video">
+    </form>
+</body>
+</html>
